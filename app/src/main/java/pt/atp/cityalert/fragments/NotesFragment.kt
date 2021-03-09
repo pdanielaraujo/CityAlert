@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import pt.atp.cityalert.R
+import pt.atp.cityalert.dataClasses.Note
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import pt.atp.cityalert.adapters.NoteAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +26,8 @@ class NotesFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var noteList: ArrayList<Note>
+    private lateinit var note_fragment: View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +40,19 @@ class NotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        note_fragment = inflater.inflate(R.layout.fragment_notes, container, false)
+        val note_recycler = note_fragment.findViewById<RecyclerView>(R.id.note_recycler)
+        noteList = ArrayList<Note>()
+
+        for (i in 0 until 10){
+            noteList.add(Note("Nota$i", "SubNota$i", "Esta é a nota $i"))
+        }
+
+        note_recycler.adapter = NoteAdapter(noteList)
+        note_recycler.layoutManager = LinearLayoutManager(this.context)
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notes, container, false)
+        return note_fragment
     }
 
     companion object {
