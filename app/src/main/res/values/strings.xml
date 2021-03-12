@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">City Alert</string>
     <string name="txt_btn_login">Login</string>
+    <string name="txt_btn_viewnotes_prelogin">View Notes</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_passwd">Password</string>
     <string name="menu_home">Home</string>
     <string name="menu_notes">Notes</string>
     <string name="menu_person">Perfil</string>

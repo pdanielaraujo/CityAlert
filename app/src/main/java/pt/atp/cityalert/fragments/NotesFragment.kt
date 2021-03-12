@@ -1,5 +1,6 @@
 package pt.atp.cityalert.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import pt.atp.cityalert.R
 import pt.atp.cityalert.dataClasses.Note
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import pt.atp.cityalert.LoginActivity
 import pt.atp.cityalert.adapters.NoteAdapter
 
 // TODO: Rename parameter arguments, choose names that match

@@ -42,10 +42,10 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
 
-    fun btn(view: View){
-        val intent = Intent(this, LoginActivity::class.java).apply {
+    //fun btn(view: View){
+    //    val intent = Intent(this, LoginActivity::class.java).apply {
 
-        }
-        startActivity(intent)
-    }
+    //   }
+    //    startActivity(intent)
+    //}
 }

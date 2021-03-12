@@ -1,12 +1,16 @@
 package pt.atp.cityalert.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import pt.atp.cityalert.LoginActivity
+import pt.atp.cityalert.MainActivity
 import pt.atp.cityalert.R
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +27,7 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -32,14 +37,26 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
 
         //Toast.makeText(this.context, R.string.app_name, Toast.LENGTH_SHORT).show()
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //super.onViewCreated(view, savedInstanceState)
+
+        //initialize views (buttons, texts, etc...)
+        val button: Button = view.findViewById(R.id.go_login_btn)
+
+        button.setOnClickListener{
+            val intent = Intent(this.context, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     companion object {
