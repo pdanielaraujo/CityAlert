@@ -1,37 +1,46 @@
 package pt.atp.cityalert.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import pt.atp.cityalert.R
-import pt.atp.cityalert.dataClasses.Note
+import pt.atp.cityalert.entities.Note
 
-class NoteAdapter(val list: ArrayList<Note>):RecyclerView.Adapter<LineViewHolder>(){
+class NoteAdapter internal constructor(context: Context):RecyclerView.Adapter<NoteAdapter.NoteViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineViewHolder {
-        val itemView = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.recycler_line, parent, false)
-        return LineViewHolder(itemView)
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+    private var notes = emptyList<Note>()
+
+    class NoteViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        val titleViewHolder: TextView = itemView.findViewById(R.id.titulo)
+        val dateViewHolder: TextView = itemView.findViewById(R.id.data_criacao)
+        val descriptionViewHolder: TextView = itemView.findViewById(R.id.texto_nota)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
+        val itemView = inflater.inflate(R.layout.recycler_line, parent, false)
+        return NoteViewHolder(itemView)
+    }
+
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        val currentPlace = notes[position]
+
+        holder.titleViewHolder.text = currentPlace.titulo
+        holder.dateViewHolder.text = currentPlace.created_on
+        holder.descriptionViewHolder.text = currentPlace.descricao
+    }
+
+    internal fun setNotes(notes: List<Note>){
+        this.notes = notes
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return notes.size
     }
 
-    override fun onBindViewHolder(holder: LineViewHolder, position: Int) {
-        val currentPlace = list[position]
 
-        holder.title_holder.text = currentPlace.title
-        holder.subtitle_holder.text = currentPlace.subtitle
-        holder.text_holder.text = currentPlace.text
-    }
-}
-
-class LineViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-    val title_holder = itemView.findViewById<TextView>(R.id.titulo)
-    val subtitle_holder = itemView.findViewById<TextView>(R.id.sub_titulo)
-    val text_holder = itemView.findViewById<TextView>(R.id.texto_nota)
 }

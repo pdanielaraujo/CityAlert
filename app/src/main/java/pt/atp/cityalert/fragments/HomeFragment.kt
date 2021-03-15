@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import pt.atp.cityalert.AddNoteActivity
 import pt.atp.cityalert.LoginActivity
-import pt.atp.cityalert.MainActivity
 import pt.atp.cityalert.R
 
 
@@ -37,8 +37,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         //Toast.makeText(this.context, R.string.app_name, Toast.LENGTH_SHORT).show()
@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
 
         //initialize views (buttons, texts, etc...)
         val button: Button = view.findViewById(R.id.go_login_btn)

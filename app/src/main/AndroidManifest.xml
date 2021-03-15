@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pt.atp.cityalert">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -12,10 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CityAlert">
         <activity
+            android:name=".AddNoteActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
