@@ -3,7 +3,6 @@
     package="pt.atp.cityalert">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,11 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CityAlert">
         <activity
-            android:name=".AddNoteActivity"
+            android:name=".ViewSpecificNoteActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
+            android:name=".AddNoteActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

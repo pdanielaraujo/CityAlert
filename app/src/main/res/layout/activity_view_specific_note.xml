@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_green"
+    tools:context=".AddNoteActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/view_specific_note_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_green"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <EditText
+        android:id="@+id/specific_note_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="40dp"
+        android:background="@drawable/txt_box_radius"
+        android:hint="@string/hint_title"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="200dp"
+        android:paddingHorizontal="17dp"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/view_specific_note_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/specific_note_description"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    <EditText
+        android:id="@+id/specific_note_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="450dp"
+        android:background="@drawable/txt_box_radius"
+        android:hint="@string/hint_note_description"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:gravity="top"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:paddingHorizontal="17dp"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/specific_note_title"
+        app:layout_constraintBottom_toTopOf="@id/save_edit_note_btn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/save_edit_note_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_radius"
+        android:layout_marginVertical="30dp"
+        android:paddingHorizontal="40dp"
+        android:text="@string/txt_btn_edit"
+        android:textColor="@color/dark_green"
+        android:visibility="invisible"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/specific_note_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

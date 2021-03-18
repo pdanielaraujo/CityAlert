@@ -10,10 +10,10 @@ import kotlinx.coroutines.internal.synchronized
 import pt.atp.cityalert.dao.NoteDao
 import pt.atp.cityalert.entities.Note
 
-@Database(entities = [Note::class], version = 7, exportSchema = false)
+@Database(entities = [Note::class], version = 8, exportSchema = false)
 abstract class NoteDB : RoomDatabase(){
 
-    abstract val noteDao: NoteDao
+    abstract fun noteDao(): NoteDao
 
     companion object{
 
@@ -33,6 +33,7 @@ abstract class NoteDB : RoomDatabase(){
                         .fallbackToDestructiveMigration()
                         .build()
                 }
+                INSTANCE = instance
                 return instance
             }
         }

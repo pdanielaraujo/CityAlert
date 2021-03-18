@@ -80,9 +80,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Pedro\AppData\Local\Temp\baseline_arrow_back_24.xml" />
-                                                <entry key="scalingPercent" value="81" />
-                                                <entry key="trimmed" value="true" />
+                                                <entry key="imagePath" value="C:\Users\Pedro\AppData\Local\Temp\baseline_edit_24.xml" />
+                                                <entry key="scalingPercent" value="96" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -93,7 +92,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/arrow_back/baseline_arrow_back_24.xml" />
+                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/edit/baseline_edit_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -140,7 +139,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="outputName" value="ic_launch_logo" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
+                                      <entry key="outputName" value="ic_edit_note" />
                                     </map>
                                   </option>
                                 </PersistentState>

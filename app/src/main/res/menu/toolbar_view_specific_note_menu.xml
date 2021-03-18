@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/start_edit_note_btn"
+        android:title="@string/start_edit_menu_title"
+        android:icon="@drawable/ic_edit_note_foreground"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/delete_note_btn"
+        android:title="@string/delete_specific_note_title"
+        android:icon="@drawable/ic_delete_all_foreground"
+        app:showAsAction="ifRoom"/>
+</menu>

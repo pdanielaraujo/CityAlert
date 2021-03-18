@@ -5,20 +5,21 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.ParcelableSparseArray
 import kotlinx.coroutines.InternalCoroutinesApi
 import pt.atp.cityalert.AddNoteActivity
+import pt.atp.cityalert.OnNoteClickListener
+import pt.atp.cityalert.ViewSpecificNoteActivity
 import pt.atp.cityalert.R
 import pt.atp.cityalert.adapters.NoteAdapter
 import pt.atp.cityalert.entities.Note
 import pt.atp.cityalert.viewModel.NoteViewModel
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
 /**
@@ -26,13 +27,13 @@ import java.time.format.DateTimeFormatter
  * Use the [NotesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NotesFragment : Fragment() {
+class NotesFragment : Fragment(){
 
     private lateinit var note_fragment: View
     @InternalCoroutinesApi
     private lateinit var noteViewModel: NoteViewModel
 
-    private val newWordActivityRequestCode = 1
+    private val newNoteActivityRequestCode = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +49,14 @@ class NotesFragment : Fragment() {
 
         // Recycler View
         val note_recycler = note_fragment.findViewById<RecyclerView>(R.id.note_recycler)
-        val adapter = NoteAdapter(this.requireContext())
+        val adapter = NoteAdapter(this.requireContext(), this)
         note_recycler.adapter = adapter
         note_recycler.layoutManager = LinearLayoutManager(this.context)
 
         // View Model
-        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        noteViewModel.allNotes.observe(this.viewLifecycleOwner, { notes ->
-            notes.let{
+        noteViewModel = ViewModelProvider(requireActivity()).get(NoteViewModel::class.java)
+        noteViewModel.allNotes.observe(viewLifecycleOwner, {notes ->
+            notes?.let {
                 adapter.setNotes(it)
             }
         })
@@ -69,20 +70,24 @@ class NotesFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK){
+        if(requestCode == newNoteActivityRequestCode && resultCode == Activity.RESULT_OK){
             data?.getStringArrayExtra(AddNoteActivity.EXTRA_REPLY)?.let {
-
-                val note = Note(titulo = it[0], created_on = it[1], descricao = it[2])
-                //val data_criacao = view?.findViewById<TextView>(R.id.data_criacao)
-
-
-                //data_criacao?.setText(formatted)
+                val note = Note(titulo = it[0], created_on = it[1], updated_on = it[2], descricao = it[3])
 
                 noteViewModel.insert(note)
             }
         }
+
+        if(requestCode == 123 && resultCode == Activity.RESULT_OK){
+            data?.getStringArrayExtra(ViewSpecificNoteActivity.EXTRA_REPLY)?.let {
+                val note = Note(id = it[0].toInt(), titulo = it[1], created_on= it[2], updated_on = it[3], descricao = it[4])
+
+                noteViewModel.updateNote(note)
+            }
+        }
     }
 
+    @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -103,16 +108,21 @@ class NotesFragment : Fragment() {
         }
     }
 
+    @InternalCoroutinesApi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.go_to_add_note_btn -> {
                 val intent = Intent(this.context, AddNoteActivity::class.java)
-                startActivityForResult(intent, newWordActivityRequestCode)
+                startActivityForResult(intent, newNoteActivityRequestCode)
+
+                true
+            }
+            R.id.delete_all_btn -> {
+                noteViewModel.deleteAll()
 
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }

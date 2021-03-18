@@ -29,10 +29,6 @@ class AddNoteActivity : AppCompatActivity() {
         toolbar.setTitle(R.string.title_activity_add_note)
         toolbar.setTitleTextColor(resources.getColor(R.color.black, null))
         toolbar.setNavigationOnClickListener{
-            //val transaction = supportFragmentManager.beginTransaction()
-            //transaction.replace(R.id.layout_fragment, NotesFragment())
-            //transaction.addToBackStack(null)
-            //transaction.commit()
             finish()
         }
 
@@ -50,15 +46,11 @@ class AddNoteActivity : AppCompatActivity() {
                 val note_title = edit_text_titulo.text.toString()
                 val note_description = edit_text_description.text.toString()
                 val current = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
                 val formatted = current.format(formatter)
                 formatted.toString()
-                replyIntent.putExtra(EXTRA_REPLY, arrayOf(note_title, formatted, note_description))
+                replyIntent.putExtra(EXTRA_REPLY, arrayOf(note_title, formatted, formatted, note_description))
                 setResult(Activity.RESULT_OK, replyIntent)
-
-                Toast.makeText(this, note_title, Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, note_title, Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, note_description, Toast.LENGTH_SHORT).show()
             }
             finish()
         }

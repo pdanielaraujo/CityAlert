@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/go_to_add_note_btn"
         android:title="@string/title_activity_add_note"
         android:icon="@drawable/ic_note_add_foreground"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/delete_all_btn"
+        android:title="@string/delete_all_menu_title"
+        android:icon="@drawable/ic_delete_all_foreground"
+        app:showAsAction="ifRoom"/>
 </menu>

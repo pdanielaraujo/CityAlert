@@ -9,9 +9,18 @@
     <string name="menu_person">Perfil</string>
     <string name="title_activity_add_note">Add Note</string>
     <string name="title_fragment_view_notes">Notes</string>
-    <string name="txt_btn_add">Add</string>
+    <string name="txt_btn_add">Save</string>
+    <string name="txt_btn_edit">Save Edit</string>
     <string name="hint_title">Title</string>
     <string name="hint_note_description">Description</string>
+    <string name="delete_all_menu_title">Delete All</string>
+    <string name="start_edit_menu_title">Edit</string>
+    <string name="delete_specific_note_title">Delete Note</string>
+    <string name="note_title_bind_view_holder">Title: %1$1s</string>
+    <string name="note_created_bind_view_holder">Created On: %1$1s</string>
+    <string name="note_updated_bind_view_holder">Updated On: %1$1s</string>
+    <string name="note_description_bind_view_holder">Description: %1$1s</string>
+
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
