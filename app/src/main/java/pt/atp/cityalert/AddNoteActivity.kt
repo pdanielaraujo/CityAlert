@@ -40,19 +40,25 @@ class AddNoteActivity : AppCompatActivity() {
         add_note_btn.setOnClickListener {
             val replyIntent = Intent()
 
-            if(TextUtils.isEmpty(edit_text_titulo.text) && TextUtils.isEmpty(edit_text_description.text)){
+            val note_title = edit_text_titulo.text.toString()
+            val note_description = edit_text_description.text.toString()
+
+            val current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+            val formatted = current.format(formatter)
+            formatted.toString()
+
+            if(TextUtils.isEmpty(note_title) || TextUtils.isEmpty(note_description)){
+                Toast.makeText(this, "Insert some text", Toast.LENGTH_SHORT).show()
+
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else{
-                val note_title = edit_text_titulo.text.toString()
-                val note_description = edit_text_description.text.toString()
-                val current = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
-                val formatted = current.format(formatter)
-                formatted.toString()
+
                 replyIntent.putExtra(EXTRA_REPLY, arrayOf(note_title, formatted, formatted, note_description))
                 setResult(Activity.RESULT_OK, replyIntent)
+
+                finish()
             }
-            finish()
         }
     }
 

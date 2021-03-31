@@ -72,12 +72,11 @@ class ViewSpecificNoteActivity : AppCompatActivity() {
             val formatted = current.format(formatter)
             formatted.toString()
 
-            if(TextUtils.isEmpty(note_title) && TextUtils.isEmpty(note_description)){
-                Toast.makeText(this, "Insert some text", Toast.LENGTH_SHORT)
+            if(TextUtils.isEmpty(note_title) || TextUtils.isEmpty(note_description)){
+                Toast.makeText(this, "Insert some text", Toast.LENGTH_SHORT).show()
+
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else{
-                Toast.makeText(this, "Insert some text", Toast.LENGTH_SHORT)
-
                 val arrayData : Array<String> = arrayOf(note_id, note_title, created_on, formatted, note_description)
 
                 replyIntent.putExtra(EXTRA_REPLY, arrayData)
