@@ -1,6 +1,7 @@
 package pt.atp.cityalert.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -22,6 +23,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         val notesDao = NoteDB.getInstance(application, viewModelScope).noteDao()
         repository = NoteRepository(notesDao)
         allNotes = repository.allNotes
+        Log.d("aa", allNotes.toString())
     }
 
     fun insert(note: Note) = viewModelScope.launch(Dispatchers.IO){

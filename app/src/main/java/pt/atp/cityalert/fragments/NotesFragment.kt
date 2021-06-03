@@ -1,22 +1,21 @@
 package pt.atp.cityalert.fragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.internal.ParcelableSparseArray
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.InternalCoroutinesApi
-import pt.atp.cityalert.AddNoteActivity
-import pt.atp.cityalert.OnNoteClickListener
-import pt.atp.cityalert.ViewSpecificNoteActivity
-import pt.atp.cityalert.R
+import pt.atp.cityalert.*
 import pt.atp.cityalert.adapters.NoteAdapter
 import pt.atp.cityalert.entities.Note
 import pt.atp.cityalert.viewModel.NoteViewModel
@@ -42,8 +41,8 @@ class NotesFragment : Fragment(){
 
     @InternalCoroutinesApi
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         note_fragment = inflater.inflate(R.layout.fragment_notes, container, false)
 
@@ -55,7 +54,7 @@ class NotesFragment : Fragment(){
 
         // View Model
         noteViewModel = ViewModelProvider(requireActivity()).get(NoteViewModel::class.java)
-        noteViewModel.allNotes.observe(viewLifecycleOwner, {notes ->
+        noteViewModel.allNotes.observe(viewLifecycleOwner, { notes ->
             notes?.let {
                 adapter.setNotes(it)
             }
@@ -72,7 +71,12 @@ class NotesFragment : Fragment(){
 
         if(requestCode == newNoteActivityRequestCode && resultCode == Activity.RESULT_OK){
             data?.getStringArrayExtra(AddNoteActivity.EXTRA_REPLY)?.let {
-                val note = Note(titulo = it[0], created_on = it[1], updated_on = it[2], descricao = it[3])
+                val note = Note(
+                    titulo = it[0],
+                    created_on = it[1],
+                    updated_on = it[2],
+                    descricao = it[3]
+                )
 
                 noteViewModel.insert(note)
             }
@@ -80,7 +84,13 @@ class NotesFragment : Fragment(){
 
         if(requestCode == 123 && resultCode == Activity.RESULT_OK){
             data?.getStringArrayExtra(ViewSpecificNoteActivity.EXTRA_REPLY)?.let {
-                val note = Note(id = it[0].toInt(), titulo = it[1], created_on= it[2], updated_on = it[3], descricao = it[4])
+                val note = Note(
+                    id = it[0].toInt(),
+                    titulo = it[1],
+                    created_on = it[2],
+                    updated_on = it[3],
+                    descricao = it[4]
+                )
 
                 noteViewModel.updateNote(note)
             }
@@ -91,7 +101,7 @@ class NotesFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = view.findViewById(R.id.view_notes_toolbar)
+        val toolbar: Toolbar = view.findViewById(R.id.view_notes_toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_go_back_foreground)
         toolbar.setTitle(R.string.title_fragment_view_notes)
         toolbar.setTitleTextColor(resources.getColor(R.color.black, null))
@@ -106,6 +116,8 @@ class NotesFragment : Fragment(){
         toolbar.setOnMenuItemClickListener {
             onOptionsItemSelected(it)
         }
+
+
     }
 
     @InternalCoroutinesApi
