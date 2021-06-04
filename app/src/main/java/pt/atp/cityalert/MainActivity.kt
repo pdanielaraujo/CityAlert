@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         setMainFragment(home_fragment)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.view_notes_toolbar)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnNavigationItemSelectedListener{
@@ -37,26 +36,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        /* Recebe o intent enviado através da página Login esconde
+        o BottomNavigationView para o user não conseguir navegar para outra página*/
         when(intent.getStringExtra("goToNotesFromLogin")){
             "openFragment" -> {
                 supportFragmentManager.beginTransaction().replace(R.id.layout_fragment, notes_fragment).commit()
+                bottomNavigationView.visibility = View.GONE
             }
         }
-
-        val sharedPref: SharedPreferences = this.getSharedPreferences(
-            getString(R.string.preference_file_key),
-            Context.MODE_PRIVATE
-        )
-        val isLogged = sharedPref.getBoolean(getString(R.string.session_status), false)
-        if(isLogged){
-            toolbar?.setNavigationOnClickListener{
-                val i = Intent(this, LoginActivity::class.java)
-                finishAffinity()
-                startActivity(i)
-            }
-            bottomNavigationView?.visibility = View.GONE
-        }
-
     }
 
     private fun setMainFragment(fragment: Fragment) =
@@ -64,11 +51,4 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.layout_fragment, fragment)
             commit()
         }
-
-    //fun btn(view: View){
-    //    val intent = Intent(this, LoginActivity::class.java).apply {
-
-    //   }
-    //    startActivity(intent)
-    //}
 }

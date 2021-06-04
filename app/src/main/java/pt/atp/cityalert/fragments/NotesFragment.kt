@@ -117,6 +117,17 @@ class NotesFragment : Fragment(){
             onOptionsItemSelected(it)
         }
 
+        /* Recebe o intent enviado através da página Login e troca o botão de navegação
+        para voltar para a página do login em vez da página inicial*/
+        when(activity?.intent?.getStringExtra("goToNotesFromLogin")){
+            "openFragment" -> {
+                toolbar.setNavigationOnClickListener{
+                    val i = Intent(activity, LoginActivity::class.java)
+                    activity?.finishAffinity()
+                    startActivity(i)
+                }
+            }
+        }
 
     }
 

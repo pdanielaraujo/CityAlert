@@ -53,10 +53,14 @@ class LoginActivity : AppCompatActivity() {
             login()
         }
 
+        /* Se o user não tem login feito manda este intent para ser possivel
+        verificar as navecações entre a pagina login e a pagina das notas*/
         btn_goToNotes.setOnClickListener {
-            val i = Intent(this@LoginActivity, MainActivity::class.java)
-            i.putExtra("goToNotesFromLogin","openFragment")
-            startActivity(i)
+            if(!isLogged){
+                val i = Intent(this@LoginActivity, MainActivity::class.java)
+                i.putExtra("goToNotesFromLogin","openFragment")
+                startActivity(i)
+            }
         }
 
     }
