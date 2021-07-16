@@ -92,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
                     )
                     with(sharedPref.edit()){
                         putBoolean(getString(R.string.session_status), true)
-                        putString(getString(R.string.person_id), c.id_pessoa.toString())
+                        putInt(getString(R.string.person_id), c.id_pessoa)
                         commit()
                     }
 
@@ -109,6 +109,7 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<OutputPost>, t: Throwable) {
                 Log.d("aaa", "ddd")
+                Log.d("aaa", t.message)
                 Toast.makeText(this@LoginActivity, "Wrong credentials", Toast.LENGTH_SHORT).show()
             }
         })

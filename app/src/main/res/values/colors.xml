@@ -12,4 +12,7 @@
     <color name="background_green">#6FAA24</color>
     <color name="dark_green">#3B8C17</color>
     <color name="green_status_bar">#144200</color>
+    <color name="blue">#126DB6</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="purple">#D622FF</color>
 </resources>

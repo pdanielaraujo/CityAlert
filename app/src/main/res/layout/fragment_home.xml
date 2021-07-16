@@ -12,21 +12,56 @@
         android:layout_height="match_parent"
         android:id="@+id/map_view"/>
 
-    <Button
-        android:id="@+id/go_login_btn"
+    <ImageView
+        android:id="@+id/legend_blue"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@color/blue"
+        android:layout_marginStart="80dp"
+        app:layout_constraintBottom_toTopOf="@id/txt_blue"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/txt_blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <Button
-        android:id="@+id/go_add_btn"
+        android:text="@string/label_buraco"
+        android:layout_marginStart="67dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <ImageView
+        android:id="@+id/legend_yellow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@color/yellow"
+        android:layout_marginStart="100dp"
+        app:layout_constraintBottom_toTopOf="@id/txt_yellow"
+        app:layout_constraintStart_toEndOf="@id/legend_blue"/>
+    <TextView
+        android:id="@+id/txt_yellow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/go_login_btn"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_marginStart="60dp"
+        android:text="@string/label_arvore"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txt_blue"/>
+    <ImageView
+        android:id="@+id/legend_purple"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@color/purple"
+        android:layout_marginStart="100dp"
+        app:layout_constraintBottom_toTopOf="@id/txt_purple"
+        app:layout_constraintStart_toEndOf="@id/legend_yellow"/>
+    <TextView
+        android:id="@+id/txt_purple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/label_poste"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txt_yellow"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
