@@ -19,5 +19,13 @@ interface EndPoints {
 
     @FormUrlEncoded
     @POST("ocorrencia")
-    fun getIdOcorrencia(@Field("id_ocorrencia") id_ocorrencia: Int): Call<Ocorrencia>
+    fun getIdOcorrencia(@Field("id") id: Int): Call<Ocorrencia>
+
+    @FormUrlEncoded
+    @POST("ocorrencia/update")
+    fun editOcorrencia(
+            @Field("id") id: Int,
+            @Field("descricao") descricao: String,
+            @Field("foto") foto: String
+    ): Call<OcorrenciaUpdate>
 }

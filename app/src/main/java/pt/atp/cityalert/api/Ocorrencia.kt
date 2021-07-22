@@ -1,7 +1,7 @@
 package pt.atp.cityalert.api
 
 data class Ocorrencia(
-        val id_ocorrencia: Int,
+        val id: Int,
         val descricao: String,
         val foto: String,
         val latitude: String,

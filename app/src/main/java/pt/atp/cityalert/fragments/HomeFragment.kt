@@ -84,7 +84,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
                                     Context.MODE_PRIVATE
                             )
 
-                            val id_ocorrencia = it.id_ocorrencia
+                            val id_ocorrencia = it.id
                             val foto = it.foto
                             var fotoBitmap: Bitmap
                             val occurrence_pessoa_id = it.pessoa_id
