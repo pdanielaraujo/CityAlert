@@ -15,12 +15,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.core.os.bundleOf
 import com.google.android.material.imageview.ShapeableImageView
-import pt.atp.cityalert.api.EndPoints
-import pt.atp.cityalert.api.Ocorrencia
-import pt.atp.cityalert.api.OcorrenciaUpdate
-import pt.atp.cityalert.api.ServiceBuilder
+import pt.atp.cityalert.api.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -181,6 +177,7 @@ class ViewSpecificOccurrenceActivity : AppCompatActivity() {
                             finish()
                         } else{
                             Toast.makeText(this@ViewSpecificOccurrenceActivity, c.MSG, Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                     }
 
@@ -192,6 +189,31 @@ class ViewSpecificOccurrenceActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+    fun deleteOccurrence(id: String?){
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.deleteOcorrencia(id!!.toInt())
+
+        call.enqueue(object : Callback<OcorrenciaDelete> {
+            override fun onResponse(call: Call<OcorrenciaDelete>, response: Response<OcorrenciaDelete>) {
+                    val c: OcorrenciaDelete = response.body()!!
+
+                    if (!c.status) {
+                        Toast.makeText(this@ViewSpecificOccurrenceActivity, c.MSG, Toast.LENGTH_SHORT).show()
+                        finish()
+                    }else {
+                        Toast.makeText(this@ViewSpecificOccurrenceActivity, c.MSG, Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+            }
+
+            override fun onFailure(call: Call<OcorrenciaDelete>, t: Throwable) {
+                Log.d("aa", t.message)
+                Toast.makeText(this@ViewSpecificOccurrenceActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -214,9 +236,8 @@ class ViewSpecificOccurrenceActivity : AppCompatActivity() {
                 true
             }
             R.id.delete_note_btn -> {
-                //noteViewModel.deleteByid(id)
+                deleteOccurrence(occurrenceId)
                 finish()
-
                 true
             }
 

@@ -28,4 +28,8 @@ interface EndPoints {
             @Field("descricao") descricao: String,
             @Field("foto") foto: String
     ): Call<OcorrenciaUpdate>
+
+    @FormUrlEncoded
+    @POST("ocorrencia/delete")
+    fun deleteOcorrencia(@Field("id") id: Int): Call<OcorrenciaDelete>
 }

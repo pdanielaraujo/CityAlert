@@ -64,108 +64,121 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
 
     override fun onMapReady(map: GoogleMap) {
         val starting_point = LatLng(39.804215, -8.069341)
+        googleMap = map
+
+        getOccurrences()
+
         map.let{
             googleMap = it
 
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(starting_point, 7f))
             map.setOnInfoWindowClickListener(this)
-            val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val callOcorrencias = request.getOcorrencias()
 
-            callOcorrencias.enqueue(object : Callback<List<Ocorrencia>> {
-                override fun onResponse(call: Call<List<Ocorrencia>>, response: Response<List<Ocorrencia>>) {
-                    if(response.isSuccessful){
-                        response.body()!!.forEach() {
-                            //var marker: Marker?
+        }
+    }
 
-                            val latLng = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
-                            val sharedPref: SharedPreferences = requireActivity().getSharedPreferences(
-                                    getString(R.string.preference_file_key),
-                                    Context.MODE_PRIVATE
-                            )
+    override fun onResume() {
+        super.onResume()
+        getOccurrences()
+    }
 
-                            val id_ocorrencia = it.id
-                            val foto = it.foto
-                            var fotoBitmap: Bitmap
-                            val occurrence_pessoa_id = it.pessoa_id
+    fun getOccurrences(){
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val callOcorrencias = request.getOcorrencias()
 
-                            Log.d("aa", "id pessoa dentro FOR: " + occurrence_pessoa_id.toString())
-                            val pessoa_id_sharedPref = sharedPref.getInt(getString(R.string.person_id), 0)
-                            Log.d("aa", pessoa_id_sharedPref.toString())
-                            val tipo_ocorrencia = it.tipo_id
-                            val titulo_ocorrencia = it.descricao
+        callOcorrencias.enqueue(object : Callback<List<Ocorrencia>> {
+            override fun onResponse(call: Call<List<Ocorrencia>>, response: Response<List<Ocorrencia>>) {
+                if(response.isSuccessful){
+                    response.body()!!.forEach() {
+                        //var marker: Marker?
 
-                            val markerOpt = MarkerOptions()
-                            val markerOptPersonal = MarkerOptions()
-                            val markerOptTypeOne = MarkerOptions()
-                            val markerOptTypeTwo = MarkerOptions()
-                            val markerOptTypeThree = MarkerOptions()
+                        val latLng = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
+                        val sharedPref: SharedPreferences = activity!!.getSharedPreferences(
+                                getString(R.string.preference_file_key),
+                                Context.MODE_PRIVATE
+                        )
 
-                            val tipoBuracoEstrada = 207F
-                            val tipoQuedaArvore = 54F
-                            val tipoQuedaPoste = 289F
+                        val id_ocorrencia = it.id
+                        val foto = it.foto
+                        var fotoBitmap: Bitmap
+                        val occurrence_pessoa_id = it.pessoa_id
 
-                            //(BitmapDescriptorFactory.HUE_AZURE)
+                        Log.d("aa", "id pessoa dentro FOR: " + occurrence_pessoa_id.toString())
+                        val pessoa_id_sharedPref = sharedPref.getInt(getString(R.string.person_id), 0)
+                        Log.d("aa", pessoa_id_sharedPref.toString())
+                        val tipo_ocorrencia = it.tipo_id
+                        val titulo_ocorrencia = it.descricao
 
-                            markerOpt.position(latLng)
-                                    .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
-                                    .icon(BitmapDescriptorFactory.defaultMarker())
-                                    .snippet(id_ocorrencia.toString())
+                        val markerOpt = MarkerOptions()
+                        val markerOptPersonal = MarkerOptions()
+                        val markerOptTypeOne = MarkerOptions()
+                        val markerOptTypeTwo = MarkerOptions()
+                        val markerOptTypeThree = MarkerOptions()
 
-                            markerOptPersonal.position(latLng)
-                                    .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                                    .snippet(id_ocorrencia.toString())
+                        val tipoBuracoEstrada = 207F
+                        val tipoQuedaArvore = 54F
+                        val tipoQuedaPoste = 289F
 
-                            markerOptTypeOne.position(latLng)
-                                    .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(tipoBuracoEstrada))
-                                    .snippet(id_ocorrencia.toString())
+                        //(BitmapDescriptorFactory.HUE_AZURE)
 
-                            markerOptTypeTwo.position(latLng)
-                                    .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(tipoQuedaArvore))
-                                    .snippet(id_ocorrencia.toString())
+                        markerOpt.position(latLng)
+                                .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
+                                .icon(BitmapDescriptorFactory.defaultMarker())
+                                .snippet(id_ocorrencia.toString())
 
-                            markerOptTypeThree.position(latLng)
-                                    .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(tipoQuedaPoste))
-                                    .snippet(id_ocorrencia.toString())
+                        markerOptPersonal.position(latLng)
+                                .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                                .snippet(id_ocorrencia.toString())
 
-                            //marker = map.addMarker(markerOpt)
+                        markerOptTypeOne.position(latLng)
+                                .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
+                                .icon(BitmapDescriptorFactory.defaultMarker(tipoBuracoEstrada))
+                                .snippet(id_ocorrencia.toString())
 
-                            //marker.showInfoWindow()
+                        markerOptTypeTwo.position(latLng)
+                                .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
+                                .icon(BitmapDescriptorFactory.defaultMarker(tipoQuedaArvore))
+                                .snippet(id_ocorrencia.toString())
 
-                            /*if (occurrence_pessoa_id == pessoa_id_sharedPref) {
-                                marker = map.addMarker(markerOptPersonal)
-                                marker_list.add(marker)
-                            } else{
-                                marker_list.add(marker)
-                            }*/
+                        markerOptTypeThree.position(latLng)
+                                .title(titulo_ocorrencia + " / Tipo: " + tipo_ocorrencia.toString())
+                                .icon(BitmapDescriptorFactory.defaultMarker(tipoQuedaPoste))
+                                .snippet(id_ocorrencia.toString())
 
-                            if(occurrence_pessoa_id == pessoa_id_sharedPref){
-                                marker = map.addMarker(markerOptPersonal)
-                                marker_list.add(marker)
-                            } else if(tipo_ocorrencia == 1) {
-                                marker = map.addMarker(markerOptTypeOne)
-                                marker_list.add(marker)
-                            } else if(tipo_ocorrencia == 2){
-                                marker = map.addMarker(markerOptTypeTwo)
-                                marker_list.add(marker)
-                            } else if(tipo_ocorrencia == 3){
-                                marker = map.addMarker(markerOptTypeThree)
-                                marker_list.add(marker)
-                            }
+                        //marker = map.addMarker(markerOpt)
+
+                        //marker.showInfoWindow()
+
+                        /*if (occurrence_pessoa_id == pessoa_id_sharedPref) {
+                            marker = map.addMarker(markerOptPersonal)
+                            marker_list.add(marker)
+                        } else{
+                            marker_list.add(marker)
+                        }*/
+
+                        if(occurrence_pessoa_id == pessoa_id_sharedPref){
+                            marker = googleMap.addMarker(markerOptPersonal)
+                            marker_list.add(marker)
+                        } else if(tipo_ocorrencia == 1) {
+                            marker = googleMap.addMarker(markerOptTypeOne)
+                            marker_list.add(marker)
+                        } else if(tipo_ocorrencia == 2){
+                            marker = googleMap.addMarker(markerOptTypeTwo)
+                            marker_list.add(marker)
+                        } else if(tipo_ocorrencia == 3){
+                            marker = googleMap.addMarker(markerOptTypeThree)
+                            marker_list.add(marker)
                         }
                     }
                 }
+            }
 
-                override fun onFailure(call: Call<List<Ocorrencia>>, t: Throwable) {
-                    Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
-                }
+            override fun onFailure(call: Call<List<Ocorrencia>>, t: Throwable) {
+                Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
 
-            })
-        }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
