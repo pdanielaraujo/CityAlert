@@ -32,4 +32,15 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("ocorrencia/delete")
     fun deleteOcorrencia(@Field("id") id: Int): Call<OcorrenciaDelete>
+
+    @FormUrlEncoded
+    @POST("ocorrencia/insert")
+    fun newReport(
+            @Field("descricao") descricao: String,
+            @Field("foto") foto: String,
+            @Field("latitude") latitude: Double,
+            @Field("longitude") longitude: Double,
+            @Field("pessoa_id") pessoa_id: Int,
+            @Field("tipo_id") tipo_id: Int
+    ): Call<OcorrenciaInsert>
 }

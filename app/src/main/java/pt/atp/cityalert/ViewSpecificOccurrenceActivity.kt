@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.google.android.gms.maps.model.Marker
 import com.google.android.material.imageview.ShapeableImageView
 import pt.atp.cityalert.api.*
 import retrofit2.Call
@@ -237,6 +238,8 @@ class ViewSpecificOccurrenceActivity : AppCompatActivity() {
             }
             R.id.delete_note_btn -> {
                 deleteOccurrence(occurrenceId)
+                val marker = intent.getStringExtra("marker")
+                //marker.remove()
                 finish()
                 true
             }

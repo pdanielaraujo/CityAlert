@@ -12,6 +12,17 @@
         android:layout_height="match_parent"
         android:id="@+id/map_view"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_occurrence_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/ic_add_24"
+        android:backgroundTint="@color/dark_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <ImageView
         android:id="@+id/legend_blue"
         android:layout_width="20dp"
@@ -34,14 +45,14 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:background="@color/yellow"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="96dp"
         app:layout_constraintBottom_toTopOf="@id/txt_yellow"
         app:layout_constraintStart_toEndOf="@id/legend_blue"/>
     <TextView
         android:id="@+id/txt_yellow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="56dp"
         android:text="@string/label_arvore"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
