@@ -73,7 +73,7 @@ class ViewSpecificNoteActivity : AppCompatActivity() {
             formatted.toString()
 
             if(TextUtils.isEmpty(note_title) || TextUtils.isEmpty(note_description)){
-                Toast.makeText(this, "Insert some text", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.empty_string, Toast.LENGTH_SHORT).show()
 
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else{
@@ -82,6 +82,7 @@ class ViewSpecificNoteActivity : AppCompatActivity() {
                 replyIntent.putExtra(EXTRA_REPLY, arrayData)
                 setResult(Activity.RESULT_OK, replyIntent)
 
+                Toast.makeText(this, R.string.edited_success, Toast.LENGTH_SHORT).show()
                 Log.d("result", "$note_id, $note_title,$created_on, $formatted, $note_description")
 
                 finish()
@@ -113,6 +114,8 @@ class ViewSpecificNoteActivity : AppCompatActivity() {
             R.id.delete_note_btn -> {
                 noteViewModel.deleteByid(id)
                 finish()
+
+                Toast.makeText(this, R.string.note_deleted, Toast.LENGTH_SHORT).show()
 
                 true
             }

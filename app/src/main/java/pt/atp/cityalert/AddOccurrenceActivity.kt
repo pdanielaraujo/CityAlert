@@ -93,8 +93,6 @@ class AddOccurrenceActivity : AppCompatActivity() {
             if(fotoString64.isEmpty()){
                 Toast.makeText(this@AddOccurrenceActivity, R.string.erro_insert_photo, Toast.LENGTH_SHORT).show()
             } else{
-                Toast.makeText(this@AddOccurrenceActivity, title.text, Toast.LENGTH_SHORT).show()
-
                 val request = ServiceBuilder.buildService(EndPoints::class.java)
                 val call = request.newReport(title.text.toString(), fotoString64, lat_val.toDouble(), lng_val.toDouble(), pessoaLogada, num_categoria)
                 call.enqueue(object : Callback<OcorrenciaInsert> {
@@ -121,11 +119,6 @@ class AddOccurrenceActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        /*if(image_occurrence.drawable == null){
-            insert_btn.setOnClickListener{
-                Toast.makeText(this@AddOccurrenceActivity, R.string.erro_insert_photo, Toast.LENGTH_SHORT).show()
-            }
-        }*/
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
             val imageBitmap = BitmapFactory.decodeFile(photoFile.absolutePath)
@@ -135,11 +128,6 @@ class AddOccurrenceActivity : AppCompatActivity() {
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             val byteArray = outputStream.toByteArray()
             fotoString64 = Base64.encodeToString(byteArray, Base64.DEFAULT)
-
-            /*insert_btn.setOnClickListener{
-                //Toast.makeText(this@AddOccurrenceActivity, num_categoria.toString(), Toast.LENGTH_SHORT).show()
-                Toast.makeText(this@AddOccurrenceActivity, fotoString64, Toast.LENGTH_SHORT).show()
-            }*/
         }
     }
 

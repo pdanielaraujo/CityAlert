@@ -44,7 +44,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
     private lateinit var marker_list: ArrayList<Marker>
     private lateinit var googleMap: GoogleMap
     private lateinit var marker: Marker
-
+    private var mapReady = false
     // last know location
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -109,10 +109,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
         googleMap = map
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(starting_point, 7f))
         googleMap.setOnInfoWindowClickListener(this)
+        getOccurrences()
+        showLocation()
+        mapReady = true
 
-        getLocationAccess()
-
-        Log.d("aa", "cona")
         /*map.let{
             googleMap = it
 
@@ -124,6 +124,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
 
     override fun onResume() {
         super.onResume()
+
+        if(mapReady){
+            getOccurrences()
+        }
         startLocationUpdates()
         Log.d("aa", "onResume - startLocationUpdates")
     }
@@ -134,10 +138,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
         Log.d("aa", "onPause - removeLocationUpdates")
     }
 
+    private fun showLocation(){
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            //Toast.makeText(requireContext(), "You have to accept to enjoy all app's services!", Toast.LENGTH_LONG).show();
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                googleMap.isMyLocationEnabled = true
+            }
+        }
+    }
+
     private fun startLocationUpdates(){
         if(ActivityCompat.checkSelfPermission(requireContext(),
-                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper() /* Looper */)
@@ -161,7 +178,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
                         //var marker: Marker?
 
                         val latLng = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
-                        val sharedPref: SharedPreferences = activity!!.getSharedPreferences(
+                        val sharedPref: SharedPreferences? = activity?.getSharedPreferences(
                                 getString(R.string.preference_file_key),
                                 Context.MODE_PRIVATE
                         )
@@ -172,7 +189,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
                         val occurrence_pessoa_id = it.pessoa_id
 
                         Log.d("aa", "id pessoa dentro FOR: " + occurrence_pessoa_id.toString())
-                        val pessoa_id_sharedPref = sharedPref.getInt(getString(R.string.person_id), 0)
+                        val pessoa_id_sharedPref = sharedPref?.getInt(getString(R.string.person_id), 0)
                         Log.d("aa", pessoa_id_sharedPref.toString())
                         val tipo_ocorrencia = it.tipo_id
                         val titulo_ocorrencia = it.descricao
@@ -254,35 +271,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnInfoWindowClick
     }
 
     override fun onInfoWindowClick(marker: Marker) {
-        Toast.makeText(context, marker.snippet, Toast.LENGTH_SHORT).show()
         val intent = Intent(context, ViewSpecificOccurrenceActivity::class.java).apply {
             putExtra("occurrenceId", marker.snippet)
         }
         startActivityForResult(intent, 123)
-    }
-
-    private val LOCATION_PERMISSION_REQUEST = 1
-
-
-    private fun getLocationAccess() {
-        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            googleMap.isMyLocationEnabled = true
-        }
-        else
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST)
-    }
-
-
-    @SuppressLint("MissingPermission")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == LOCATION_PERMISSION_REQUEST) {
-            if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
-                googleMap.isMyLocationEnabled = true
-            }
-            else {
-                Toast.makeText(context, "User has not granted location access permission", Toast.LENGTH_LONG).show()
-            }
-        }
     }
 
     companion object {

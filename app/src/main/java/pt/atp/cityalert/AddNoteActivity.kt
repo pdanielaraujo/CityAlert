@@ -49,11 +49,12 @@ class AddNoteActivity : AppCompatActivity() {
             formatted.toString()
 
             if(TextUtils.isEmpty(note_title) || TextUtils.isEmpty(note_description)){
-                Toast.makeText(this, "Insert some text", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.empty_string, Toast.LENGTH_SHORT).show()
 
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else{
 
+                Toast.makeText(this, R.string.created_success, Toast.LENGTH_SHORT).show()
                 replyIntent.putExtra(EXTRA_REPLY, arrayOf(note_title, formatted, formatted, note_description))
                 setResult(Activity.RESULT_OK, replyIntent)
 

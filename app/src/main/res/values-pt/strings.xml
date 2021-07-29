@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">City Alert</string>
+    <string name="txt_btn_login">Entrar</string>
+    <string name="txt_btn_logout">Sair</string>
+    <string name="txt_btn_viewnotes_prelogin">Ver Notas</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_passwd">Palavra-Pass</string>
+    <string name="menu_home">Início</string>
+    <string name="menu_notes">Notas</string>
+    <string name="menu_person">Perfil</string>
+    <string name="title_activity_add_note">Adicionar Nota</string>
+    <string name="title_fragment_view_notes">Notas</string>
+    <string name="txt_btn_add">Guardar</string>
+    <string name="txt_btn_edit">Guardar Edição</string>
+    <string name="hint_title">Título</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="hint_note_description">Descrição</string>
+    <string name="delete_all_menu_title">Apagar Tudo</string>
+    <string name="start_edit_menu_title">Editar</string>
+    <string name="delete_specific_note_title">Apagar Nota</string>
+    <string name="delete_specific_occurrence_title">Apagar Ocorrência</string>
+    <string name="note_title_bind_view_holder">Título: %1$1s</string>
+    <string name="note_created_bind_view_holder">Criada em: %1$1s</string>
+    <string name="note_updated_bind_view_holder">Atualizada em: %1$1s</string>
+    <string name="note_description_bind_view_holder">Descrição: %1$1s</string>
+    <string name="coordenadas">Coordernadas</string>
+    <string name="titulo">Descrição</string>
+    <string name="lat">Lat:</string>
+    <string name="lng">Lng:</string>
+    <string name="label_buraco">Buraco</string>
+    <string name="label_arvore">Árvore Caída</string>
+    <string name="label_poste">Poste Caído</string>
+    <string name="erro_insert_photo">Tire uma foto primeiro.</string>
+    <string name="empty_string">Insira algum texto.</string>
+    <string name="created_success">Nota criada com sucesso.</string>
+    <string name="edited_success">Nota editada com sucesso.</string>
+    <string name="notes_deleted">Notas apagadas com sucesso.</string>
+    <string name="note_deleted">Nota apagada com sucesso.</string>
+</resources>

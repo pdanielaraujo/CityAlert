@@ -101,7 +101,6 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(i)
                     finish()
 
-                    Toast.makeText(applicationContext, c.email, Toast.LENGTH_SHORT).show()
                     Log.d("aaa", c.email)
                     Log.d("aaa", "ccc")
                 }

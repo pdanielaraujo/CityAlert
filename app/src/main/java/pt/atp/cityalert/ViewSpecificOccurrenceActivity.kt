@@ -50,32 +50,6 @@ class ViewSpecificOccurrenceActivity : AppCompatActivity() {
             finish()
         }
 
-        /*occurrence_save_edit.setOnClickListener{
-            val newDescription = occurrence_description.text
-            Log.d("aa", newDescription.toString())
-            Log.d("aa", occurrenceId)
-            val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.editOcorrencia(occurrenceId.toInt(), newDescription.toString(), fotoString64)
-
-            call.enqueue(object : Callback<OcorrenciaUpdate> {
-                override fun onResponse(call: Call<OcorrenciaUpdate>, response: Response<OcorrenciaUpdate>) {
-                    val c: OcorrenciaUpdate = response.body()!!
-
-                    if(!c.status) {
-                        Toast.makeText(this@ViewSpecificOccurrenceActivity, c.MSG, Toast.LENGTH_SHORT).show()
-                    } else{
-                        Toast.makeText(this@ViewSpecificOccurrenceActivity, c.MSG, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<OcorrenciaUpdate>, t: Throwable) {
-                    Log.d("aa", t.message)
-                    Toast.makeText(this@ViewSpecificOccurrenceActivity, "aa" + "${t.message}", Toast.LENGTH_SHORT).show()
-                }
-
-            })
-        }*/
-
         occurrence_new_photo.setOnClickListener{
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             photoFile = getPhotoFile(FILE_NAME)
@@ -238,8 +212,6 @@ class ViewSpecificOccurrenceActivity : AppCompatActivity() {
             }
             R.id.delete_note_btn -> {
                 deleteOccurrence(occurrenceId)
-                val marker = intent.getStringExtra("marker")
-                //marker.remove()
                 finish()
                 true
             }

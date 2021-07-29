@@ -24,21 +24,26 @@
     <string name="note_created_bind_view_holder">Created On: %1$1s</string>
     <string name="note_updated_bind_view_holder">Updated On: %1$1s</string>
     <string name="note_description_bind_view_holder">Description: %1$1s</string>
-    <string name="google_map_api_key">AIzaSyBKfB3vdOjF_kPjt0AAKGqADNNvPiPZ5-w</string>
-    <string name="coordenadas">Coordenadas</string>
-    <string name="titulo">Descrição</string>
+    <string name="google_map_api_key" translatable="false">AIzaSyBKfB3vdOjF_kPjt0AAKGqADNNvPiPZ5-w</string>
+    <string name="coordenadas">Coordinates</string>
+    <string name="titulo">Description</string>
     <string name="lat">Lat: </string>
     <string name="lng">Lng: </string>
-    <string name="label_buraco">Buraco</string>
-    <string name="label_arvore">Queda Árvore</string>
-    <string name="label_poste">Queda Poste</string>
+    <string name="label_buraco">Hole</string>
+    <string name="label_arvore">Fallen Tree</string>
+    <string name="label_poste">Fallen Pole</string>
 
     <!-- Shared Preferences -->
-    <string name="preference_file_key">sp-fk</string>
-    <string name="session_status">logged</string>
-    <string name="person_id">pid</string>
-    <string name="title_activity_add_occurrence">AddOccurrenceActivity</string>
+    <string name="preference_file_key" translatable="false">sp-fk</string>
+    <string name="session_status" translatable="false">logged</string>
+    <string name="person_id" translatable="false">pid</string>
+    <string name="title_activity_add_occurrence" translatable="false">AddOccurrenceActivity</string>
+    <string name="erro_insert_photo">Take a photo first.</string>
+    <string name="empty_string">Insert some text.</string>
+    <string name="created_success">Note created successfuly.</string>
+    <string name="edited_success">Note edited successfuly.</string>
+    <string name="notes_deleted">Notes deleted successfuly.</string>
+    <string name="note_deleted">Note deleted successfuly.</string>
     <!-- Errors -->
-    <string name="erro_insert_photo">Tire uma foto primeiro.</string>
 
 </resources>

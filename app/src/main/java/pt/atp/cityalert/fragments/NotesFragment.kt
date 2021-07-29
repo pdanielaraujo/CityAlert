@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -143,6 +144,7 @@ class NotesFragment : Fragment(){
             R.id.delete_all_btn -> {
                 noteViewModel.deleteAll()
 
+                Toast.makeText(requireContext(), R.string.notes_deleted, Toast.LENGTH_SHORT).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)
